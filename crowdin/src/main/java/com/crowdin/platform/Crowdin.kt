@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.res.Resources
 import android.graphics.Bitmap
+import android.util.Log
 import android.view.Menu
 import androidx.annotation.MenuRes
 import com.crowdin.platform.auth.AuthActivity
@@ -223,6 +224,8 @@ object Crowdin {
      */
     @JvmStatic
     fun forceUpdate(context: Context) {
+        Log.v(CROWDIN_TAG, "Force update started")
+
         dataManager?.updateData(context, config.networkType)
     }
 
