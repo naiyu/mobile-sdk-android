@@ -188,8 +188,13 @@ class CrowdinWidgetService : Service(), LoadingStateListener {
     }
 
     private fun reloadData() {
-        showToast("Data reload in progress")
-        if (Crowdin.isRealTimeUpdatesConnected()) {
+
+        val logMsg = "Data reload in progress"
+
+        showToast(logMsg)
+        Log.v(CROWDIN_TAG, logMsg)
+
+        if (Crowdin.isRealTimeUpdatesEnabled()) {
             Crowdin.downloadTranslation(object : TranslationDownloadCallback {
                 override fun onSuccess() {
                     showToast(TRANSLATION_RELOADED)
