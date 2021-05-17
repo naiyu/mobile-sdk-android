@@ -54,18 +54,12 @@ internal class StringDataRemoteRepository(
         if (preferredLanguageCode == null) {
             preferredLanguageCode = getMatchedCode(supportedLanguages)
             if (preferredLanguageCode == null) {
-                Log.e(
-                    Crowdin.CROWDIN_TAG,
-                    "Couldn't match preferred lang code with: $supportedLanguages"
-                )
+                languageDataCallback?.onFailure(Throwable("Can't find preferred Language"))
                 return
             }
         } else {
             if (supportedLanguages?.contains(preferredLanguageCode!!) == false) {
-                Log.e(
-                    Crowdin.CROWDIN_TAG,
-                    "Supported Languages ($supportedLanguages) doesn't contain preferred language ($preferredLanguageCode)"
-                )
+                languageDataCallback?.onFailure(Throwable("Can't find preferred Language"))
                 return
             }
         }
