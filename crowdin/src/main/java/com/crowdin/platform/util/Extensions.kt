@@ -51,9 +51,32 @@ fun executeIO(function: () -> Unit) {
 }
 
 fun getMatchedCode(list: List<String>?): String? {
-    val code = "${Locale.getDefault().language}-${Locale.getDefault().country}"
+    val currentLanguageCode = when (Locale.getDefault().language) {
+        "in" -> {
+            // 印尼语
+            "id"
+        }
+        "iw" -> {
+            // 希伯来语
+            "he"
+        }
+        "ji" -> {
+            // 依地语
+            "yi"
+        }
+        else -> {
+            Locale.getDefault().language
+        }
+    }
+    val code = when (Locale.getDefault().country) {
+        "" -> {
+            currentLanguageCode
+        } else -> {
+            "${Locale.getDefault().language}-${Locale.getDefault().country}"
+        }
+    }
     if (list?.contains(code) == false) {
-        val languageCode = Locale.getDefault().language
+        val languageCode = currentLanguageCode
         return languageCode.takeIf { list.contains(languageCode) }
     }
     return code

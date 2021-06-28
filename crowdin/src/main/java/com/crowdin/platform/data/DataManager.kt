@@ -95,6 +95,18 @@ internal class DataManager(
     }
 
     fun refreshData(languageData: LanguageData) {
+
+        if (languageData.language.startsWith("id-")) {
+            languageData.language = languageData.language.replace("id-", "in-")
+        }
+        if (languageData.language.startsWith("he-")) {
+            languageData.language = languageData.language.replace("he-", "iw-")
+        }
+        if (languageData.language.startsWith("yi-")) {
+            languageData.language = languageData.language.replace("yi-", "ji-")
+        }
+
+
         localRepository.saveLanguageData(languageData)
         if (FeatureFlags.isRealTimeUpdateEnabled || FeatureFlags.isScreenshotEnabled) {
             dataChangeObserver.onDataChanged()
