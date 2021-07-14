@@ -11,6 +11,7 @@ import com.crowdin.platform.data.TextMetaDataProvider
 import com.crowdin.platform.data.model.TextMetaData
 import com.crowdin.platform.util.FeatureFlags
 import com.crowdin.platform.util.TextUtils
+import com.crowdin.platform.widget.CrowdinMarqueeTextView
 import java.lang.ref.WeakReference
 
 /**
@@ -21,8 +22,12 @@ internal class TextViewTransformer(val textMetaDataProvider: TextMetaDataProvide
     BaseTransformer() {
 
     override val viewType = TextView::class.java
+    val crowdinMarqueeTextViewViewType = CrowdinMarqueeTextView::class.java
 
     override fun transform(view: View, attrs: AttributeSet): View {
+        if (crowdinMarqueeTextViewViewType.isInstance(view)) {
+            return view
+        }
         if (!viewType.isInstance(view)) {
             return view
         }
